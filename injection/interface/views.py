@@ -20,6 +20,7 @@ def register(request):
                 messages.info(request, "Username already taken.")
             else:
                 cursor.execute(f"INSERT INTO interface_user (username, password) VALUES ('{username}', '{password}')")
+                return redirect("login")
         return redirect("register")
     return render(request, "register.html")
 
