@@ -1,18 +1,20 @@
-<h2>User: {{ username }}</h2>
-<form method="POST">
-  {% csrf_token %}
-  <input name="username" placeholder="Exact username" required>
-  <button type="submit">Search</button>
-</form>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 90vh;">
+    <h2>User: {{ username }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input name="username" placeholder="Exact username" required>
+        <button type="submit">Search</button>
+    </form>
 
-{% if results %}
-  <h3>Results:</h3>
-  <ul>
-    {% for user in results %}
-    <li>{{ user.0 }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+    {% if results %}
+    <h3 style="margin: 0">Results:</h3>
+    <ul style="padding: 0">
+      {% for user in results %}
+        <li>{{ user.0 }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 
 <form method="POST" action="/logout/">
   {% csrf_token %}

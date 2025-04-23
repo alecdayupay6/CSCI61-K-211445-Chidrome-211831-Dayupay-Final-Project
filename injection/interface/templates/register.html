@@ -1,16 +1,19 @@
-<form method="POST">
-    {% csrf_token %}
-    <input name="username" placeholder="Username" required>
-    <input name="password" type="password" placeholder="Password" required>
-    <button type="submit">Register</button>
-    {% if messages %} 
-        {% for message in messages %}
-            <p>{{message}}</p>
-        {% endfor %}
-    {% endif %}
-</form>
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 90vh;">
+    <h2>Register</h2>
+    <form method="POST" style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+        {% csrf_token %}
+        <input name="username" placeholder="Username" required>
+        <input name="password" type="password" placeholder="Password" required>
+        <button type="submit">Create New User</button>
+        {% if messages %} 
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div> 
 
 <form method="POST" action="/login/">
     {% csrf_token %}
     <button type="submit">Login Page</button>
-  </form>
+</form>

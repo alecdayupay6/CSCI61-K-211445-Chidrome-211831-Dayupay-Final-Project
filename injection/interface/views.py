@@ -31,13 +31,17 @@ def login_(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
+
+        if not username or not password:
+            messages.info(request, "")
+            return redirect("login")
         
         with connection.cursor() as cursor:
             query = f"SELECT * FROM interface_user WHERE username='{username}' AND password='{password}'"
             cursor.execute(query)
             user = cursor.fetchone()
             if user:
-                request.session["username"] = username
+                request.session["username"] = user[1]
                 return redirect("search")
             else:
                 messages.info(request, "Username or Password is incorrect.")
@@ -46,6 +50,7 @@ def login_(request):
 def search(request):
     username = request.session.get("username")
     if not username:
+        messages.info(request, "You need to login frist.")
         return redirect("login")
     
     results = []
